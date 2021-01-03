@@ -17,7 +17,7 @@ export class Product {
   @Column({ type: "decimal", nullable: true })
   price: number;
 
-  @Column()
+  @Column({default: false})
   is_price_visible: boolean;
 
   @Column()
@@ -29,7 +29,7 @@ export class Product {
   @Column({ type: "text", nullable: true })
   note: string;
 
-  @Column()
+  @Column({default: false})
   is_visible: boolean;
 
   @Column({ type: "text", nullable: true })
