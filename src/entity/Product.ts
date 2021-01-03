@@ -11,10 +11,10 @@ export class Product {
   @Column()
   picture: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   description: string;
 
-  @Column({ type: "decimal" })
+  @Column({ type: "decimal", nullable: true })
   price: number;
 
   @Column()
@@ -26,13 +26,13 @@ export class Product {
   @Column({ type: "integer" })
   quantity: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   note: string;
 
   @Column()
   is_visible: boolean;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   tags: string;
 
   @Column()
