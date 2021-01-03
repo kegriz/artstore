@@ -8,15 +8,14 @@ import { Routes } from "./routes";
 const PORT: string | number = process.env.PORT || 5000;
 
 createConnection()
-  // eslint-disable-next-line
-  .then(async (connection) => {
+  .then(async () => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
 
     // register express routes from defined application routes
     Routes.forEach((route) => {
-      (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => { // eslint-disable-line
+      (app as Promise<void>)[route.method](route.route, (req: Request, res: Response, next: void) => {
         const result = new (route.controller as any)()[route.action](req, res, next); // eslint-disable-line
         if (result instanceof Promise) {
           result.then((result) => (result !== null && result !== undefined ? res.send(result) : undefined));
