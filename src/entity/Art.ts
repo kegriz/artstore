@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToMany, JoinColumn } from "typeorm";
 import { Product } from "./Product";
+import { Category } from "./Category";
 
-@Entity()
+@Entity({ name: "arts" })
 export class Art {
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,10 +25,11 @@ export class Art {
   @Column({ type: "text", nullable: true })
   technique: string;
 
-  @Column()
-  categories: string; // many-to-many ? ()
+  // eslint-disable-next-line
+  @ManyToMany((type) => Category, (category) => category.arts)
+  categories: Category[];
 
-  @OneToOne((type) => Product, (product) => product.art)
+  @OneToOne((type) => Product, (product) => product.art) // eslint-disable-line
   @JoinColumn()
   product: Product;
 }

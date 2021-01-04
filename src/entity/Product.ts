@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from "typeorm";
 import { Art } from "./Art";
+import { Status } from "./Status";
 
 @Entity({ name: "products" })
 export class Product {
@@ -36,9 +37,13 @@ export class Product {
   @Column({ type: "text", nullable: true })
   tags: string;
 
-  @Column()
-  status: string; // TODO one-to-many statuses ( available / sold / unavailable )
+  // eslint-disable-next-line
+  @ManyToOne(type => Status, status => status.products)
+  status: Status;
 
-  @OneToOne((type) => Art, (art) => art.product)
+  // eslint-disable-next-line
+  @OneToOne((type) => Art, (art) => art.product, {
+    cascade: true,
+  })
   art: Art;
 }
