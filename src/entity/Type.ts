@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Product } from "./Product";
 
-@Entity({ name: "statuses" })
-export class Status {
+@Entity({ name: "types" })
+export class Type {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: "text" })
-  name: string; // ( available / sold / unavailable )
+  name: string; // (arts, books, prints)
 
   // eslint-disable-next-line
-  @OneToMany((type) => Product, (product) => product.status)
+  @OneToMany((type) => Product, (product) => product.type)
   products: Product[];
 }
