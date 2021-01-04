@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
+import { Art } from "./Art";
 
 @Entity({ name: "products" })
 export class Product {
@@ -17,11 +18,11 @@ export class Product {
   @Column({ type: "decimal", nullable: true })
   price: number;
 
-  @Column({default: false})
+  @Column({ default: false })
   is_price_visible: boolean;
 
   @Column()
-  type: string; // TODO on-to-many types (art / books / prints / t-shirts)
+  type: string; // TODO one-to-many types (art / books / prints / t-shirts)
 
   @Column({ type: "integer" })
   quantity: number;
@@ -29,12 +30,15 @@ export class Product {
   @Column({ type: "text", nullable: true })
   note: string;
 
-  @Column({default: false})
+  @Column({ default: false })
   is_visible: boolean;
 
   @Column({ type: "text", nullable: true })
   tags: string;
 
   @Column()
-  status: string; // TODO on-to-many statuses ( available / sold / unavailable )
+  status: string; // TODO one-to-many statuses ( available / sold / unavailable )
+
+  @OneToOne((type) => Art, (art) => art.product)
+  art: Art;
 }
