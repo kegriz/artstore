@@ -8,7 +8,8 @@ import { Routes } from "./routes";
 const PORT: string | number = process.env.PORT || 5000;
 
 createConnection()
-  .then(async () => {
+  // eslint-disable-next-line
+  .then(async (connection) => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
